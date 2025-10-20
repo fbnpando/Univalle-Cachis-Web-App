@@ -1,0 +1,18 @@
+Feature: Compra de producto dentro del Marketplace Universitario
+  In order to adquirir productos de mis compañeros emprendedores
+  As a estudiante de la universidad
+  I want to comprar productos mediante verificación y pago interno
+
+  Scenario: Compra exitosa de un producto activo
+    Given existe un producto "Empanadas x6" con 10 unidades y precio 25 Bs
+    And soy estudiante con código "U2025007"
+    When selecciono 2 unidades y realizo el pago por QR
+    Then el sistema confirma la compra
+    And reduce el stock a 8 unidades
+    And notifica al vendedor del pedido
+
+  Scenario: Intento de compra de producto inactivo
+    Given el producto "Empanadas x6" está marcado como inactivo
+    When intento comprarlo
+    Then el sistema muestra "Producto no disponible temporalmente"
+s
